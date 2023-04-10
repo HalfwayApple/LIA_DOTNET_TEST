@@ -1,0 +1,40 @@
+/* Provide sufficient contrast against white background */
+
+.booking-row {
+  padding: 15px;
+  border-bottom: 1px solid gainsboro;
+}
+
+.booking-item {
+  display: flex;
+  column-gap: 10%;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.booking-title {
+  text-transform: capitalize;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.time-slot {
+  font-style: italic;
+}
+
+.username {
+  font-weight: 500;
+}
+
+button {
+  background-color: teal;
+  color: #fff;
+  padding: 6px 12px;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+}
+
+button:focus {
+  outline: none;
+}

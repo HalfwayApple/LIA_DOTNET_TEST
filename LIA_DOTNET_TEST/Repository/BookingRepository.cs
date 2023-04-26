@@ -19,19 +19,44 @@ namespace LIA_DOTNET_TEST.Repository
             ICollection<Booking> bookings = ProduceTestBooking(timeSlot);
 
 
+
+            ICollection<User> users = new List<User>();
+            for (int i = 0; i < 5; i++)
+            {
+                User user = new User()
+                {
+                    Name = "User " + i.ToString()
+                };
+                users.Add(user);
+            }
+            context.Users.AddRange(users);
+
+
+
             context.TimeSlots.AddRange(timeSlots);
             context.Bookings.AddRange(bookings);
 
             context.SaveChanges();
         }
 
-        public ICollection<Booking> GetAllBookings()
+        public Booking GetBookingById(int id)
+        {
+            using Context context = new();
+            return context.Bookings.FirstOrDefault(x => x.Id == id);
+		}
+
+		public ICollection<Booking> GetAllBookings()
         {
             using Context context = new();
             return context.Bookings.Include(ts => ts.User).Include(ts => ts.TimeSlot).ToList();
         }
+		public ICollection<User> GetAllUsers()
+		{
+			using Context context = new();
+			return context.Users.ToList();
+		}
 
-        public ICollection<TimeSlot> GetAllTimeSlots()
+		public ICollection<TimeSlot> GetAllTimeSlots()
         {
             using Context context = new();
             return context.TimeSlots.ToList();
@@ -41,10 +66,12 @@ namespace LIA_DOTNET_TEST.Repository
 		{
             using Context context = new();
 
+            User newUser = new User() { Name = "Pedro Pascal" };
+
             Booking booking = new()
             {
                 Day = day,
-                User = user,
+                User = newUser,
                 TimeSlot = timeSlot
             };
 
@@ -52,6 +79,16 @@ namespace LIA_DOTNET_TEST.Repository
             context.SaveChanges();
 
             return booking;
+		}
+
+		public void DeleteBookingById(int id)
+		{
+			using Context context = new();
+
+            var booking = context.Bookings.FirstOrDefault(x => x.Id == id);
+
+			context.Bookings.Remove(booking);
+			context.SaveChanges();
 		}
 
 		private static ICollection<TimeSlot> ProduceTimeSlots()

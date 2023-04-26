@@ -1,5 +1,6 @@
 using LIA_DOTNET_TEST.Interfaces;
 using LIA_DOTNET_TEST.Repository;
+using LIA_DOTNET_TEST.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ BookingRepository repository = new();
 repository.Seed();
 
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<BookingService, BookingService>();
 
 var app = builder.Build();
 

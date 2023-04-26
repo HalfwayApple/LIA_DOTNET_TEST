@@ -1,15 +1,22 @@
 /* Provide sufficient contrast against white background */
 
 .booking-row {
+  display: flex;
+  flex-direction: column;
   padding: 15px;
   border-bottom: 1px solid gainsboro;
 }
 
 .booking-item {
-  display: flex;
-  column-gap: 10%;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr;
+  grid-template-areas: "time user button";
   margin: 10px 0;
+  padding: 2px;
   align-items: center;
+  background-color: aliceblue;
+  border: 1px solid black;
+  border-radius: 8px;
 }
 
 .booking-title {
@@ -19,6 +26,8 @@
 }
 
 .time-slot {
+  display: flex;
+  flex-direction: column;
   font-style: italic;
 }
 
@@ -26,10 +35,15 @@
   font-weight: 500;
 }
 
+.green {
+  color: #70b573;
+}
+
 button {
   background-color: teal;
   color: #fff;
   padding: 6px 12px;
+  margin: 4px;
   border: 0;
   outline: 0;
   border-radius: 8px;

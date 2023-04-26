@@ -6,8 +6,8 @@ namespace LIA_DOTNET_TEST.Interfaces
     {
         public ICollection<Booking> GetAllBookings();
         public ICollection<TimeSlot> GetAllTimeSlots();
-
-        // Add AddBooking
         public Booking CreateBooking(int day, User user, TimeSlot timeSlot);
-    }
+		public void DeleteBookingById(int id);
+		ICollection<User> GetAllUsers();
+	}
 }

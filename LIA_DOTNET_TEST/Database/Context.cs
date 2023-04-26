@@ -11,7 +11,7 @@ namespace LIA_DOTNET_TEST.Database
             optionsBuilder.UseInMemoryDatabase(databaseName: "BookingDb");
         }
         public DbSet<TimeSlot> TimeSlots { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Booking> Bookings { get; set; }
     }
 }

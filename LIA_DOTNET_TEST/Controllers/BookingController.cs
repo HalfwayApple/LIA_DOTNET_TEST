@@ -1,28 +1,25 @@
-﻿using LIA_DOTNET_TEST.Data;
-using LIA_DOTNET_TEST.Interfaces;
+﻿using LIA_DOTNET_TEST.Interfaces;
 using LIA_DOTNET_TEST.Models;
+using LIA_DOTNET_TEST.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using System.Text.Json;
 
 namespace LIA_DOTNET_TEST.Controllers
 {
-    [ApiController]
+	[ApiController]
     [Route("[controller]")]
     public class BookingController : ControllerBase
     {
 
         readonly IBookingRepository _bookingRepository;
+        readonly BookingService _bookingService;
 
-        public BookingController(IBookingRepository bookingRepository)
-        {
-            _bookingRepository = bookingRepository;
-        }
+		public BookingController(IBookingRepository bookingRepository, BookingService bookingService)
+		{
+			_bookingRepository = bookingRepository;
+			_bookingService = bookingService;
+		}
 
-        [HttpGet]
+		[HttpGet]
         public ActionResult<ICollection<Booking>> GetAll()
         {
             try
@@ -39,8 +36,23 @@ namespace LIA_DOTNET_TEST.Controllers
 
         }
 
+		[HttpDelete("{id}")]
+		public ActionResult<Booking> DeleteBookingById(int id)
+		{
+			try
+			{
+				_bookingRepository.DeleteBookingById(id);
 
-        [HttpGet("timeslots")]
+				return Ok();
+			}
+			catch (Exception exception)
+			{
+				return BadRequest(new { exception.Message });
+			}
+		}
+
+
+		[HttpGet("timeslots")]
         public ActionResult<ICollection<TimeSlot>> GetTimeSlots()
         {
             try
@@ -56,29 +68,33 @@ namespace LIA_DOTNET_TEST.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult<ICollection<Booking>> CreateBooking ([FromBody] InputBookingModel inputModel)
-        {
-			TimeSlot timeSlot = new TimeSlot()
-            {
-                StartTime = TimeSpan.Parse(inputModel.StartTime),
-                EndTime = TimeSpan.Parse(inputModel.EndTime)
-            };
-
-			User user = new User()
-            {
-                Name = "Cean Sonnery"
-            };
-
+		[HttpGet("users")]
+		public ActionResult<ICollection<TimeSlot>> GetUsers()
+		{
 			try
 			{
-                Booking booking = _bookingRepository.CreateBooking(inputModel.Day, user, timeSlot);
+				ICollection<User> users = _bookingRepository.GetAllUsers();
+
+				return Ok(users);
+			}
+			catch (Exception exception)
+			{
+
+				return BadRequest(new { exception.Message });
+			}
+		}
+
+		[HttpPost]
+        public ActionResult<ICollection<Booking>> CreateBooking ([FromBody] InputBookingModel inputModel)
+        {
+			try
+			{
+                Booking booking = _bookingService.CreateBooking(inputModel.Day, inputModel.StartTime, inputModel.EndTime, inputModel.User);
 
 				return Ok(booking);
 			}
 			catch (Exception exception)
 			{
-
 				return BadRequest(new { exception.Message });
 			}
 		}

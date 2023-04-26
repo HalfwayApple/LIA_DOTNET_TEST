@@ -14,7 +14,7 @@ const BookingTable = () => {
         const day = i + 1;
         const booking = bookings[day] || [];
         
-        return(<BookingRow day={day} dayName={dayName} booking={booking} />)
+        return (<BookingRow key={dayName} day={day} dayName={dayName} booking={booking} />)
       })}
     </div>
   )

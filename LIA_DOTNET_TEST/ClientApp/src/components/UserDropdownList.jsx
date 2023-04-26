@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { React, useContext, useState } from 'react';
+import { BookingContext } from '../contexts/BookingProvider';
+
 
 const UserDropdownList = () => {
-    /*
+
+    const { users } = useContext(BookingContext);
+    const { currentUser } = useContext(BookingContext);
+    const { setCurrentUser } = useContext(BookingContext);
+
     const [selectedValue, setSelectedValue] = useState("");
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
+        setCurrentUser(users[event.target.value - 1]);
     };
 
     return (
@@ -18,9 +25,9 @@ const UserDropdownList = () => {
                 ))}
             </select>
             <p>You have selected: {selectedValue}</p>
+            <p>Which ends up being: {currentUser.name}</p>
         </div>
     );
-    */
 };
 
 export default UserDropdownList

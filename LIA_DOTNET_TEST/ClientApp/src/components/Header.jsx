@@ -1,8 +1,9 @@
 import React from 'react'
+import UserDropdownList from './UserDropdownList'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <UserDropdownList />
   )
 }
 

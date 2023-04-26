@@ -89,7 +89,7 @@ const BookingProvider = (props) => {
         updateBookings();
     }
 
-  return (<BookingContext.Provider value={{ bookings, timeSlots, addBooking, removeBooking }}>
+  return (<BookingContext.Provider value={{ bookings, timeSlots, addBooking, removeBooking, users, currentUser, setCurrentUser }}>
         {props.children}
     </BookingContext.Provider>);
 }

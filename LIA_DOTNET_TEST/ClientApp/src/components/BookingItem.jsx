@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import { BookingContext } from '../contexts/BookingProvider';
 
 
-const BookingItem = ({ booker, startTime, endTime, dayName, day }) => {
+const BookingItem = ({ booker, startTime, endTime, day }) => {
   
   const { addBooking, removeBooking } = useContext(BookingContext);
 
   return (
-    <div key={`${dayName}_${startTime}_${endTime}`} className="booking-item">
+    <div className="booking-item">
       <span className="time-slot">
         {startTime} - {endTime}
       </span>

@@ -71,7 +71,7 @@ namespace LIA_DOTNET_TEST.Repository
             Booking booking = new()
             {
                 Day = day,
-                User = newUser,
+                User = user,
                 TimeSlot = timeSlot
             };
 

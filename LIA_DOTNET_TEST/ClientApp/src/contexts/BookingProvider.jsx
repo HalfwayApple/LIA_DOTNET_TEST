@@ -19,6 +19,7 @@ const BookingProvider = (props) => {
             try
             {
                 let timeSlots = await fetch("/booking/timeslots").then((response) => response.json());
+                console.log(timeSlots);
                 let users = await fetch("/booking/users").then((response) => response.json());
                 setTimeSlots(timeSlots);
                 setUsers(users);

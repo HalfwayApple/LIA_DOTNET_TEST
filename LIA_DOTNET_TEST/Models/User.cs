@@ -1,10 +1,7 @@
-using System.ComponentModel.DataAnnotations;
+namespace LIA_DOTNET_TEST.Models;
 
-namespace LIA_DOTNET_TEST.Models
+public class User
 {
-    public class User
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-    }
+    public int Id { get; set; }
+    public string? Name { get; set; }
 }

@@ -1,6 +1,5 @@
-﻿namespace LIA_DOTNET_TEST.Data
+﻿namespace LIA_DOTNET_TEST.Data;
+
+public class Database
 {
-    public class Database
-    {
-    }
 }

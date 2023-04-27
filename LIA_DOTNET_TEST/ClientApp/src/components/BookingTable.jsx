@@ -4,7 +4,7 @@ import BookingRow from './BookingRow';
 
 const BookingTable = () => {
 
-  const {bookings} = useContext(BookingContext)
+  const { bookings } = useContext(BookingContext);
 
   const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 

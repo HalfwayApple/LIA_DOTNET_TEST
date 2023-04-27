@@ -1,10 +1,9 @@
-﻿namespace LIA_DOTNET_TEST.Models
+﻿namespace LIA_DOTNET_TEST.Models;
+
+public class InputBookingModel
 {
-	public class InputBookingModel
-	{
-        public string StartTime { get; set; }
-		public string EndTime { get; set; }
-		public int Day { get; set; }
-		public User User { get; set; }
-    }
+    public string StartTime { get; set; }
+	public string EndTime { get; set; }
+	public int Day { get; set; }
+	public User User { get; set; }
 }

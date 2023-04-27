@@ -22,7 +22,7 @@ const BookingProvider = (props) => {
                 let users = await fetch("/booking/users").then((response) => response.json());
                 setTimeSlots(timeSlots);
                 setUsers(users);
-                setCurrentUser(users[2]);
+                setCurrentUser(users[0]);
                 updateBookings();
             }
             catch (error)

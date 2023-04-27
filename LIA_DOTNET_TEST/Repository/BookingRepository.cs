@@ -21,7 +21,7 @@ namespace LIA_DOTNET_TEST.Repository
 
 
             ICollection<User> users = new List<User>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 1; i < 6; i++)
             {
                 User user = new User()
                 {
@@ -66,7 +66,7 @@ namespace LIA_DOTNET_TEST.Repository
 		{
             using Context context = new();
 
-            User newUser = new User() { Name = "Pedro Pascal" };
+            context.Users.Attach(user);
 
             Booking booking = new()
             {

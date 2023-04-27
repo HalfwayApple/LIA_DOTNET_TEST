@@ -1,4 +1,4 @@
-import { React, useContext, useState } from 'react';
+import { React, useContext } from 'react';
 import { BookingContext } from '../contexts/BookingProvider';
 
 
@@ -8,23 +8,20 @@ const UserDropdownList = () => {
     const { currentUser } = useContext(BookingContext);
     const { setCurrentUser } = useContext(BookingContext);
 
-    const [selectedValue, setSelectedValue] = useState("");
-
     const handleChange = (event) => {
-        setSelectedValue(event.target.value);
-        setCurrentUser(users[event.target.value - 1]);
+        setCurrentUser(users.find(x => x.id == event.target.value));
     };
 
     return (
         <div>
             <label htmlFor="my-dropdown">User:</label>
-            <select id="my-dropdown" value={selectedValue} onChange={handleChange}>
-                <option value="">--Please choose a user--</option>
+            <select id="my-dropdown" value={currentUser.id} onChange={handleChange}>
                 {users.map(user => (
-                    <option key={user.id} value={user.id}>{user.name}</option>
+                    <option key={user.id} value={user.id}>
+                        {user.name}
+                    </option>
                 ))}
             </select>
-            <p>You have selected: {selectedValue}</p>
             <p>Which ends up being: {currentUser.name}</p>
         </div>
     );

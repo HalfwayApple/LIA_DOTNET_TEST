@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace LIA_DOTNET_TEST.Models
 {
     public class User

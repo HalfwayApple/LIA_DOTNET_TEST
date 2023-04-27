@@ -10,11 +10,11 @@ const BookingProvider = (props) => {
     const [timeSlots, setTimeSlots] = useState([]);
     const [users, setUsers] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
+    const [movingBookingInProcess, setMovingBookingInProcess] = useState(false);
+    const [bookingToMove, setBookingToMove] = useState([]);
 
 
     useEffect(() => {
-
-
         (async () => {
             try
             {
@@ -71,6 +71,20 @@ const BookingProvider = (props) => {
         updateBookings();
     }
 
+    const startMoveBooking = async (id) =>
+    {
+        setMovingBookingInProcess(true);
+        setBookingToMove(id);
+
+    }
+
+    const endMoveBooking = async (inputStartTime, inputEndTime, inputDay) =>
+    {
+        addBooking(inputStartTime, inputEndTime, inputDay);
+        removeBooking(bookingToMove);
+        setMovingBookingInProcess(false);
+    }
+
     const removeBooking = async (id) =>
     {
         await fetch(`/booking/${id}`,
@@ -89,7 +103,7 @@ const BookingProvider = (props) => {
         updateBookings();
     }
 
-  return (<BookingContext.Provider value={{ bookings, timeSlots, addBooking, removeBooking, users, currentUser, setCurrentUser }}>
+    return (<BookingContext.Provider value={{ bookings, timeSlots, addBooking, removeBooking, users, currentUser, setCurrentUser, movingBookingInProcess, startMoveBooking, endMoveBooking}}>
         {props.children}
     </BookingContext.Provider>);
 }
